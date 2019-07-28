@@ -21,10 +21,6 @@ from flask import Flask
 # TODO: Change "Template" to a unique name for your skill
 class TemplateSkill(MycroftSkill):
 
-    @app.route('/')
-    def index():
-        return 'Hello world'
-
     # The constructor of the skill, which calls MycroftSkill's constructor
     def __init__(self):
         super(TemplateSkill, self).__init__(name="TemplateSkill")
@@ -71,6 +67,10 @@ class TemplateSkill(MycroftSkill):
     #
     # def stop(self):
     #    return False
+
+@app.route('/')
+    def index():
+        return 'Hello world'
 
 # The "create_skill()" method is used to create an instance of the skill.
 # Note that it's outside the class itself.
