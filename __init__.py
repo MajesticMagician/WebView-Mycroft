@@ -26,10 +26,6 @@ from flask import Flask
     def index():
         return 'Hello world'
 
-    if __name__ == '__main__':
-        app.run(debug=True, host='0.0.0.0')
-
-
     # The constructor of the skill, which calls MycroftSkill's constructor
     def __init__(self):
         super(TemplateSkill, self).__init__(name="TemplateSkill")
@@ -63,6 +59,10 @@ from flask import Flask
             self.count -= 1
         self.speak_dialog("count.is.now", data={"count": self.count})
 
+    @intent_handler(IntentBuilder("").require("Start").require("Web"))
+    def handle_web_start(self, message):
+        app.run(debug=True, host='192.168.0.16')
+        
     # The "stop" method defines what Mycroft does when told to stop during
     # the skill's execution. In this case, since the skill's functionality
     # is extremely simple, there is no need to override it.  If you DO
