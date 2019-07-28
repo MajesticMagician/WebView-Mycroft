@@ -21,8 +21,6 @@ from flask import Flask
 # TODO: Change "Template" to a unique name for your skill
 class TemplateSkill(MycroftSkill):
 
-    app = Flask(__name__)
-
     @app.route('/')
     def index():
         return 'Hello world'
@@ -62,6 +60,7 @@ class TemplateSkill(MycroftSkill):
 
     @intent_handler(IntentBuilder("").require("web").require("server"))
     def handle_web_start(self, message):
+        app = Flask(__name__)
         app.run(debug=True, host='192.168.0.16')
 
     # The "stop" method defines what Mycroft does when told to stop during
