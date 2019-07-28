@@ -17,7 +17,7 @@ from flask import Flask
 
 # Each skill is contained within its own class, which inherits base methods
 # from the MycroftSkill class.  You extend this class as shown below.
-
+app = Flask(__name__)
 # TODO: Change "Template" to a unique name for your skill
 class TemplateSkill(MycroftSkill):
 
@@ -56,7 +56,6 @@ class TemplateSkill(MycroftSkill):
 
     @intent_handler(IntentBuilder("").require("web").require("server"))
     def handle_web_start(self, message):
-        app = Flask(__name__)
         app.run(debug=True, host='192.168.0.16')
 
     # The "stop" method defines what Mycroft does when told to stop during
