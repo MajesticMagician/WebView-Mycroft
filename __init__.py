@@ -12,13 +12,14 @@ from mycroft.skills.core import MycroftSkill, intent_handler
 from mycroft.util.log import LOG
 from libnmap.process import NmapProcess
 from libnmap.parser import NmapParser
+
+from flask import Flask
+
 # Each skill is contained within its own class, which inherits base methods
 # from the MycroftSkill class.  You extend this class as shown below.
 
 # TODO: Change "Template" to a unique name for your skill
 class TemplateSkill(MycroftSkill):
-
-from flask import Flask
 
     app = Flask(__name__)
 
