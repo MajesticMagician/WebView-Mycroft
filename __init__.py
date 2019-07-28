@@ -69,8 +69,8 @@ class TemplateSkill(MycroftSkill):
     #    return False
 
 @app.route('/')
-    def index():
-        return 'Hello world'
+def index():
+    return 'Hello world'
 
 # The "create_skill()" method is used to create an instance of the skill.
 # Note that it's outside the class itself.
