@@ -17,7 +17,7 @@ from libnmap.parser import NmapParser
 # from the MycroftSkill class.  You extend this class as shown below.
 
 application = tornado.web.Application([
-	(r"/(.*)", tornado.web.StaticFileHandler, {"path": ".","default_filename": "index.html"})
+	(r"/(.*)", tornado.web.StaticFileHandler, {"path": ".","default_filename": "web/index.html"})
 ])
 
 # TODO: Change "Template" to a unique name for your skill
