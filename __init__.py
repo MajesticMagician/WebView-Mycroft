@@ -6,7 +6,8 @@
 # libraries.  If you use an external library, be sure to include it
 # in the requirements.txt file so the library is installed properly
 # when the skill gets installed later by a user.
-
+import tornado.ioloop
+import tornado.web
 from adapt.intent import IntentBuilder
 from mycroft.skills.core import MycroftSkill, intent_handler
 from mycroft.util.log import LOG
@@ -15,6 +16,10 @@ from libnmap.parser import NmapParser
 import app
 # Each skill is contained within its own class, which inherits base methods
 # from the MycroftSkill class.  You extend this class as shown below.
+
+application = tornado.web.Application([
+	(r"/(.*)", tornado.web.StaticFileHandler, {"path": ".","default_filename": "index.html"})
+])
 
 # TODO: Change "Template" to a unique name for your skill
 class TemplateSkill(MycroftSkill):
@@ -42,8 +47,9 @@ class TemplateSkill(MycroftSkill):
         # In this case, respond by simply speaking a canned response.
         # Mycroft will randomly speak one of the lines from the file
         #    dialogs/en-us/hello.world.dialog
-        self.speak_dialog("hello.world")
-
+        application.listen(8080,"0.0.0.0")
+	    tornado.ioloop.IOLoop.instance().start()
+        
     @intent_handler(IntentBuilder("").require("Count").require("Dir"))
     def handle_count_intent(self, message):
         if message.data["Dir"] == "up":
