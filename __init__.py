@@ -48,8 +48,8 @@ class TemplateSkill(MycroftSkill):
         # Mycroft will randomly speak one of the lines from the file
         #    dialogs/en-us/hello.world.dialog
         application.listen(8080,"0.0.0.0")
-	    tornado.ioloop.IOLoop.instance().start()
-        
+        tornado.ioloop.IOLoop.instance().start()
+
     @intent_handler(IntentBuilder("").require("Count").require("Dir"))
     def handle_count_intent(self, message):
         if message.data["Dir"] == "up":
