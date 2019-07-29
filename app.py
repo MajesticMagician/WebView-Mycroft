@@ -1,10 +1,10 @@
-from flask import Flask
+import tornado.ioloop
+import tornado.web
 
-app = Flask(__name__)
-
-@app.route("/")
-def main():
-    return "Main"
+application = tornado.web.Application([
+	(r"/(.*)", tornado.web.StaticFileHandler, {"path": ".","default_filename": "index.html"})
+])
 
 if __name__ == "__main__":
-    app.run(debug=True, host="0.0.0.0", port=80)
+	application.listen(8080,"0.0.0.0")
+	tornado.ioloop.IOLoop.instance().start()

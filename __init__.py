@@ -12,7 +12,7 @@ from mycroft.skills.core import MycroftSkill, intent_handler
 from mycroft.util.log import LOG
 from libnmap.process import NmapProcess
 from libnmap.parser import NmapParser
-
+import app
 # Each skill is contained within its own class, which inherits base methods
 # from the MycroftSkill class.  You extend this class as shown below.
 
@@ -52,9 +52,7 @@ class TemplateSkill(MycroftSkill):
             self.count -= 1
         self.speak_dialog("count.is.now", data={"count": self.count})
 
-    @intent_handler(IntentBuilder("").require("web").require("server"))
-    def handle_web_start(self, message):
-        import app
+    
     # The "stop" method defines what Mycroft does when told to stop during
     # the skill's execution. In this case, since the skill's functionality
     # is extremely simple, there is no need to override it.  If you DO
