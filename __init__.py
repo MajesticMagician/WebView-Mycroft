@@ -54,7 +54,7 @@ class TemplateSkill(MycroftSkill):
 
     @intent_handler(IntentBuilder("").require("web").require("server"))
     def handle_web_start(self, message):
-        import app.py
+        import app
     # The "stop" method defines what Mycroft does when told to stop during
     # the skill's execution. In this case, since the skill's functionality
     # is extremely simple, there is no need to override it.  If you DO
