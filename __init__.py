@@ -16,9 +16,13 @@ from libnmap.parser import NmapParser
 # Each skill is contained within its own class, which inherits base methods
 # from the MycroftSkill class.  You extend this class as shown below.
 
-application = tornado.web.Application([
+make_app = tornado.web.Application([
 	(r"/(.*)", tornado.web.StaticFileHandler, {"path": ".","default_filename": "index.html"})
 ])
+
+class MainHandler(tornado.web.RequestHandler):
+    def get(self):
+        self.write("Hello, world")
 
 # TODO: Change "Template" to a unique name for your skill
 class TemplateSkill(MycroftSkill):
@@ -46,8 +50,9 @@ class TemplateSkill(MycroftSkill):
         # In this case, respond by simply speaking a canned response.
         # Mycroft will randomly speak one of the lines from the file
         #    dialogs/en-us/hello.world.dialog
-        application.listen(8080,"0.0.0.0")
-        tornado.ioloop.IOLoop.instance().start()
+         app = make_app()
+         app.listen(8888)
+         tornado.ioloop.IOLoop.current().start()
 
     @intent_handler(IntentBuilder("").require("Count").require("Dir"))
     def handle_count_intent(self, message):
@@ -71,3 +76,8 @@ class TemplateSkill(MycroftSkill):
 # Note that it's outside the class itself.
 def create_skill():
     return TemplateSkill()
+
+def make_app():
+    return tornado.web.Application([
+        (r"/", MainHandler),
+    ])
